@@ -38,8 +38,6 @@ export class UserService {
         range: 'Unballoon!C:C',
       });
 
-      console.log(res.data.values);
-
       const rows = res.data.values.slice(1);
 
       const promises = [];
