@@ -25,6 +25,8 @@
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "axios": "^1.2.3",
+    "cheerio": "^1.0.0-rc.12",
     "googleapis": "^110.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
