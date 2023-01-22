@@ -2,6 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { google } from 'googleapis';
 import axios from 'axios';
 import cheerio from 'cheerio';
+import { type } from 'os';
 
 @Injectable()
 export class UserService {
@@ -29,7 +30,13 @@ export class UserService {
   async readSheet() {
     try {
       const auth = await google.auth.getClient({
-        keyFile: './secrets.json',
+        projectId: process.env.PROJECT_ID,
+        credentials: {
+          client_email: process.env.CLIENT_EMAIL,
+          private_key: process.env.PRIVATE_KEY.split(String.raw`\n`).join('\n'),
+          type: process.env.TYPE,
+          client_id: process.env.CLIENT_ID,
+        },
         scopes: [process.env.SCOPE],
       });
 

@@ -1,5 +1,4 @@
 .env
-# secrets.json
 
 # compiled output
 /dist
