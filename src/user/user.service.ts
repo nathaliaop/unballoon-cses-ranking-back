@@ -28,9 +28,14 @@ export class UserService {
 
   async readSheet() {
     try {
+      const auth = await google.auth.getClient({
+        keyFile: './secrets.json',
+        scopes: [process.env.SCOPE],
+      });
+
       const sheets = google.sheets({
         version: 'v4',
-        auth: await google.auth.getClient({ scopes: [process.env.SCOPE] }),
+        auth,
       });
 
       const res = await sheets.spreadsheets.values.get({
