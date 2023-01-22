@@ -15,7 +15,7 @@ export class UserService {
         let handle = $('.title-block').text().slice(1);
         handle = handle.slice(handle.indexOf('User') + 5, handle.indexOf('\n'));
 
-        const numberOfQuestions = $(`a[href*=${userId}]`).text();
+        const numberOfQuestions = $(`a[href*=/problemset/user/${userId}]`).text();
 
         return {
           id: userId,
