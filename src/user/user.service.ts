@@ -20,12 +20,16 @@ export class UserService {
         return {
           id: userId,
           username: handle,
-          numberOfQuestions: Number(numberOfQuestions),
+          number_of_questions: Number(numberOfQuestions),
         };
       });
 
     return userInfo;
   };
+
+  getUserInfoCSESAPI = async (userIds: string[]) => {
+    return await axios.get(`${process.env.API_SCRAPER}?user_ids=${userIds.join(';')}`).then((response) => response.data);
+  }
 
   async readSheet() {
     try {
@@ -50,17 +54,9 @@ export class UserService {
         range: 'Unballoon!C:C',
       });
 
-      const rows = res.data.values.slice(1);
+      const user_ids = res.data.values.slice(1).map(user => user[0]);
 
-      const promises = [];
-
-      rows.map(async (row) => {
-        const userId = row[0];
-
-        promises.push(this.getUserInfoCSES(userId));
-      });
-
-      return await Promise.all(promises);
+      return await this.getUserInfoCSESAPI(user_ids);
     } catch (err) {
       throw new HttpException('The API returned an error: ' + err, 500);
     }
