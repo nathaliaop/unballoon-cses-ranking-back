@@ -54,9 +54,21 @@ export class UserService {
         range: 'Unballoon!C:C',
       });
 
-      const user_ids = res.data.values.slice(1).map(user => user[0]);
+      const rows = res.data.values.slice(1);
 
-      return await this.getUserInfoCSESAPI(user_ids);
+      const promises = [];
+
+      rows.map(async (row) => {
+        const userId = row[0];
+
+        promises.push(this.getUserInfoCSES(userId));
+      });
+
+      return await Promise.all(promises);
+
+      // const user_ids = res.data.values.slice(1).map(user => user[0]);
+
+      // return await this.getUserInfoCSESAPI(user_ids);
     } catch (err) {
       throw new HttpException('The API returned an error: ' + err, 500);
     }
