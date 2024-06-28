@@ -28,7 +28,7 @@ export class UserService {
   };
 
   getUserInfoCSESAPI = async (userIds: string[]) => {
-    return await axios.get(`${process.env.API_SCRAPER}?user_ids=${userIds.join(';')}`).then((response) => response.data);
+    return await axios.get(`${process.env.API_SCRAPER}?user_ids=${userIds.join(',')}`).then((response) => response.data);
   }
 
   async readSheet() {
