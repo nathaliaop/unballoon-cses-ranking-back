@@ -27,8 +27,12 @@ export class UserService {
     return userInfo;
   };
 
-  getUserInfoCSESAPI = async (userIds: string[]) => {
+  getUsersInfoCSESAPI = async (userIds: string[]) => {
     return await axios.get(`${process.env.API_SCRAPER}?user_ids=${userIds.join(',')}`).then((response) => response.data);
+  }
+
+  getUserInfoCSESAPI = async (userId: string) => {
+    return await axios.get(`${process.env.API_SCRAPER}?user_ids=${userId}`).then((response) => response.data);
   }
 
   async readSheet() {
@@ -66,9 +70,17 @@ export class UserService {
 
       // return await Promise.all(promises);
 
-      const user_ids = res.data.values.slice(1).map(user => user[0]);
+      const userIds = res.data.values.slice(1).map(user => user[0]);
 
-      return await this.getUserInfoCSESAPI(user_ids);
+      const promises = [];
+
+      userIds.forEach(userId => {
+        promises.push(this.getUserInfoCSESAPI(userId));
+      });
+
+      return await Promise.all(promises);
+
+      // return await this.getUsersInfoCSESAPI(userIds);
     } catch (err) {
       throw new HttpException('The API returned an error: ' + err, 500);
     }
