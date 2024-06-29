@@ -1,0 +1,16 @@
+services:
+  unballoon-cses-ranking-back:
+    image: docker.io/tilnoene/unballoon-cses-ranking-back:latest
+    ports:
+      - 9001:4000
+    container_name: unballoon-cses-ranking-back
+    environment:
+      API_SCRAPER: "<api_scraper_url>"
+      API_CSES: "<cses_homepage>"
+      CLIENT_ID: ""
+      TYPE: ""
+      PRIVATE_KEY: ""
+      CLIENT_EMAIL: ""
+      PROJECT_ID: ""
+      SCOPE: ""
+      SHEET_ID: ""

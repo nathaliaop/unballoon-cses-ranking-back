@@ -1,9 +1,9 @@
 {
-  "name": "unballoon-cses-ranking",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
+  "name": "unballoon-cses-ranking-back",
+  "version": "0.2.0",
+  "description": "UnBalloon CSES Ranking backend",
+  "author": "Nathália Pereira",
+  "private": false,
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
