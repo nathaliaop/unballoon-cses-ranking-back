@@ -32,7 +32,7 @@ export class UserService {
   }
 
   getUserInfoCSESAPI = async (userId: string) => {
-    return await axios.get(`${process.env.API_SCRAPER}?user_ids=${userId}`).then((response) => response.data);
+    return await axios.get(`${process.env.API_SCRAPER}?user_ids=${userId}`).then((response) => response.data[0]);
   }
 
   async readSheet() {
