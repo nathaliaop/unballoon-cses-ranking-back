@@ -1,6 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { google } from 'googleapis';
 import { UserService } from './user.service';
+import dayjs from 'dayjs';
 
 @Controller('user')
 export class UserController {
@@ -8,6 +9,7 @@ export class UserController {
 
   @Get()
   getUsersInfo() {
-    return this.userService.readSheet();
+    // this.userService.updateSheet();
+    return this.userService.getMemoizedUsersInfo();
   }
 }
