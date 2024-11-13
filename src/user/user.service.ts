@@ -1,9 +1,10 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { google } from 'googleapis';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import { type } from 'os';
 import dayjs from 'dayjs';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 type UserData = {
   id: string;
@@ -48,7 +49,10 @@ export class UserService {
       .then((response) => response.data[0]);
   };
 
+  @Cron(CronExpression.EVERY_10_MINUTES) // '*/1 * * * *'
   async updateSheet() {
+    Logger.log('Running update sheet cron');
+
     try {
       const auth = await google.auth.getClient({
         projectId: process.env.PROJECT_ID,
